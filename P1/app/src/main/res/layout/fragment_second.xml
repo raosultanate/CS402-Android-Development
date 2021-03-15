@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".secondFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tempTextView"
+            android:layout_width="208dp"
+            android:layout_height="51dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.273" />
+
+        <RadioGroup
+            android:id="@+id/rdioGrp"
+            android:layout_width="138dp"
+            android:layout_height="144dp"
+            android:background="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tempTextView"
+            app:layout_constraintVertical_bias="0.07999998">
+
+            <RadioButton
+                android:id="@+id/radioKelvin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Kelvin" />
+
+            <RadioButton
+                android:id="@+id/radioFarenheit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Farenheit" />
+
+            <RadioButton
+                android:id="@+id/radioCelcius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Celcius" />
+        </RadioGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
