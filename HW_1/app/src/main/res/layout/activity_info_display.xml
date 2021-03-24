@@ -2,11 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/masterLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InfoDisplay">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="227dp"
         android:layout_height="293dp"
         android:orientation="vertical"
@@ -36,5 +38,36 @@
             android:textSize="36sp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/bColorRed"
+        android:layout_width="173dp"
+        android:layout_height="51dp"
+        android:text="Red Background"
+        app:backgroundTint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bcolorBlue"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/bcolorBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Blue Background"
+        app:backgroundTint="#00B7FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bColorRed"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="bColorRed,bcolorBlue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

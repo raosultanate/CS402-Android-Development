@@ -3,6 +3,8 @@ package com.example.hw_1
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Layout
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -23,6 +25,20 @@ class InfoDisplay : AppCompatActivity() {
            var intent: Intent = Intent(this, Act3::class.java)
            startActivity(intent)
        }
+
+        val redBut : Button = findViewById<Button>(R.id.bColorRed)
+        val blueBut: Button  = findViewById<Button>(R.id.bcolorBlue)
+
+        val masterLayout = findViewById<View>(R.id.masterLayout)
+
+        redBut.setOnClickListener {
+            masterLayout.setBackgroundColor(getResources().getColor(R.color.red))
+        }
+
+        blueBut.setOnClickListener {
+            masterLayout.setBackgroundColor(getResources().getColor(R.color.blue))
+        }
+
 
 
     }
