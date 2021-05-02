@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "701173077769",
+    "project_id": "dapparels-b6fcb",
+    "storage_bucket": "dapparels-b6fcb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701173077769:android:489077f0bfea35e48ca5d8",
+        "android_client_info": {
+          "package_name": "com.example.dapparels"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701173077769-3juvsk8hgm4imt18hg9hg90pionkpabf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dapparels",
+            "certificate_hash": "b243f463017b447a3f008e2f573ceb8825fab017"
+          }
+        },
+        {
+          "client_id": "701173077769-oo8g0nekvkcc4sqr06u5h0pa1ru7of1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCMKcre1hNXIsCEW1gNqFCPhgjpnA0IEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701173077769-oo8g0nekvkcc4sqr06u5h0pa1ru7of1k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
