@@ -6,13 +6,11 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.example.dapparels.ui.activities.LoginActivity
-import com.example.dapparels.ui.activities.RegisterActivity
-import com.example.dapparels.ui.activities.UserProfileActivity
 import com.example.dapparels.Utilities.Constants
+import com.example.dapparels.Utilities.GlideLoader
 import com.example.dapparels.models.Product
 import com.example.dapparels.models.User
-import com.example.dapparels.ui.activities.SettingsActivity
+import com.example.dapparels.ui.activities.*
 import com.example.dapparels.ui.fragments.DashboardFragment
 import com.example.dapparels.ui.fragments.ProductsFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -182,5 +180,23 @@ class FireStoreClass {
                 Log.e(fragment.javaClass.simpleName, "Error while getting dashboard items list.", e)
             }
     }
+
+    fun getProductDetails(activity: ProductDetailsActivity, productId: String){
+        mFireStore.collection(Constants.PRODUCTS).document(productId).get().addOnSuccessListener { document ->
+            Log.e(activity.javaClass.simpleName, document.toString())
+
+            val product : Product = document.toObject(Product::class.java)!!
+
+            if (product != null){
+
+                activity.productDetailSuccess(product)
+            }
+
+
+        }.addOnFailureListener{
+
+        }
+    }
+
 
 }

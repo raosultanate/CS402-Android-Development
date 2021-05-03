@@ -66,5 +66,11 @@
     <string name="no_products_added_yet">No products added yet!</string>
     <string name="no_dashboard_item_found">No items found!</string>
 
+    <string name="title_product_details">PRODUCT DETAILS</string>
+    <string name="lbl_product_description">Product Description</string>
+    <string name="lbl_product_details_stock_quantity">Stock Quantity</string>
+
+
+
 
 </resources>
