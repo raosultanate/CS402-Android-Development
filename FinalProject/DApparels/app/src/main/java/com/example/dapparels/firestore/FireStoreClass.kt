@@ -7,7 +7,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.dapparels.Utilities.Constants
-import com.example.dapparels.Utilities.GlideLoader
+import com.example.dapparels.models.CartItem
 import com.example.dapparels.models.Product
 import com.example.dapparels.models.User
 import com.example.dapparels.ui.activities.*
@@ -198,5 +198,35 @@ class FireStoreClass {
         }
     }
 
+    fun addCartItems(activity: ProductDetailsActivity, addToCart: CartItem){
+        mFireStore.collection(Constants.CART_ITEMS).document().set(addToCart, SetOptions.merge()).addOnSuccessListener {
+            activity.addToCartSuccess()
+        }
+            .addOnFailureListener{e ->
+                Log.e(activity.javaClass.simpleName, "Error while creating document for the cart item.")
+            }
+    }
+
+
+    fun checkIfItemExitInCart(activity:ProductDetailsActivity, productId: String){
+        mFireStore.collection(Constants.CART_ITEMS).whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .whereEqualTo(Constants.PRODUCT_ID, productId).get().addOnSuccessListener { document ->
+
+                Log.e(activity.javaClass.simpleName, document.documents.toString())
+
+                if(document.documents.size > 0){
+                    activity.productExistInCart()
+                }
+
+                else {
+                    activity.productDoesNotExistInCart()
+                }
+
+
+            }.addOnFailureListener{e->
+                Log.e(activity.javaClass.simpleName, "Error while checking the Existing Cart.")
+
+            }
+    }
 
 }
