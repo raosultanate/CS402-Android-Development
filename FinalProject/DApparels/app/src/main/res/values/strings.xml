@@ -85,4 +85,7 @@
     <string name="msg_item_removed_successfully">Item removed successfully.</string>
 
     <string name="msg_for_available_stock">Available stock is %1$s!. You can not add more than stock quantity.</string>
+
+    <string name="no_orders_placed_yet">No orders placed yet!</string>
+
 </resources>

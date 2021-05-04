@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DApparels">
-        <activity android:name=".ui.activities.CheckoutActivity"></activity>
+
         <activity
             android:name=".ui.activities.CartListActivity"
             android:screenOrientation="portrait"

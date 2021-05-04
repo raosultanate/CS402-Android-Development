@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.item_cart_layout.view.*
 /**
  * A adapter class for dashboard items list.
  */
-open class CartItemsListAdapter(
+open class CartItemListAdapter(
     private val context: Context,
     private var list: ArrayList<CartItem>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

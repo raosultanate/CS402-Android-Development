@@ -158,7 +158,7 @@
             android:gravity="center"
             android:paddingTop="@dimen/btn_padding"
             android:paddingBottom="@dimen/btn_padding"
-            android:text="@string/btn_lbl_checkout"
+            android:text="Place Order"
             android:textColor="@android:color/white"
             android:textSize="@dimen/btn_textSize"
             app:layout_constraintEnd_toEndOf="parent"

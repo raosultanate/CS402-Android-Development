@@ -8,10 +8,12 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.dapparels.Utilities.Constants
 import com.example.dapparels.models.CartItem
+import com.example.dapparels.models.Order
 import com.example.dapparels.models.Product
 import com.example.dapparels.models.User
 import com.example.dapparels.ui.activities.*
 import com.example.dapparels.ui.fragments.DashboardFragment
+import com.example.dapparels.ui.fragments.OrdersFragment
 import com.example.dapparels.ui.fragments.ProductsFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -467,6 +469,77 @@ class FireStoreClass {
                     "Error while updating the cart item.",
                     e
                 )
+            }
+    }
+
+
+    fun placeOrder (activity: CartListActivity, order: Order){
+        mFireStore.collection(Constants.ORDERS).document().set(order, SetOptions.merge())
+            .addOnSuccessListener {
+                Log.i(activity.javaClass.simpleName, "Items added to cart successfully!")
+            }
+            .addOnFailureListener{
+                Log.e(activity.javaClass.simpleName, "Error while placing an Order")
+            }
+    }
+
+
+    fun updateAllDetails(activity: CartListActivity, cartList: ArrayList<CartItem>){
+
+        //Create FireStoreBatch to update everything at once.
+        val writeBatch = mFireStore.batch()
+
+        for (cartItem in cartList) {
+
+            val productHashMap = HashMap<String, Any>()
+
+            productHashMap[Constants.STOCK_QUANTITY] =
+                (cartItem.stock_quantity.toInt() - cartItem.cart_quantity.toInt()).toString()
+
+            val documentReference = mFireStore.collection(Constants.PRODUCTS).document(cartItem.product_id)
+
+            writeBatch.update(documentReference, productHashMap)
+        }
+
+        for (cartItem in cartList) {
+            val documentReference = mFireStore.collection(Constants.CART_ITEMS).document(cartItem.id)
+            writeBatch.delete(documentReference)
+        }
+
+        writeBatch.commit()
+            .addOnSuccessListener {
+
+                Log.i(activity.javaClass.simpleName, "Cart Updated Successfully on Database End!")
+
+            }
+            .addOnFailureListener{e ->
+                Log.e(activity.javaClass.simpleName, "Error while updating all the details after order is placed.")
+            }
+
+    }
+
+    fun getMyOrdersList(fragment: OrdersFragment) {
+        mFireStore.collection(Constants.ORDERS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+                val list: ArrayList<Order> = ArrayList()
+
+                for (i in document.documents) {
+
+                    val orderItem = i.toObject(Order::class.java)!!
+                    orderItem.id = i.id
+
+                    list.add(orderItem)
+                }
+
+                fragment.populateOrdersListInUI(list)
+
+            }
+            .addOnFailureListener { e ->
+
+                Log.e(fragment.javaClass.simpleName, "Error while getting the orders list.", e)
             }
     }
 
