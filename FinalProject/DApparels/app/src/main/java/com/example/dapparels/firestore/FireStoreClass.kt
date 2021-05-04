@@ -7,12 +7,10 @@ import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.dapparels.Utilities.Constants
-import com.example.dapparels.models.CartItem
-import com.example.dapparels.models.Order
-import com.example.dapparels.models.Product
-import com.example.dapparels.models.User
+import com.example.dapparels.models.*
 import com.example.dapparels.ui.activities.*
 import com.example.dapparels.ui.fragments.DashboardFragment
+import com.example.dapparels.ui.fragments.HomeFragment
 import com.example.dapparels.ui.fragments.OrdersFragment
 import com.example.dapparels.ui.fragments.ProductsFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -160,23 +158,27 @@ class FireStoreClass {
     fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
 
         //to get storage reference
-        val sRef: StorageReference = FirebaseStorage.getInstance().reference.
-        child(Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "." + Constants.getFileExtensions(activity, imageFileURI))
+        val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
+            Constants.USER_PROFILE_IMAGE + System.currentTimeMillis() + "." + Constants.getFileExtensions(
+                activity,
+                imageFileURI
+            )
+        )
 
         sRef.putFile(imageFileURI!!).addOnSuccessListener { taskSnapshot ->
 
-            Log.e("Firebase ImageURL",taskSnapshot.metadata!!.reference!!.downloadUrl.toString())
+            Log.e("Firebase ImageURL", taskSnapshot.metadata!!.reference!!.downloadUrl.toString())
 
             taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener { uri ->
                 Log.e("Downloadable Image URL", uri.toString())
-                when(activity){
+                when (activity) {
                     is UserProfileActivity -> {
                         activity.imageUploadSuccess(uri.toString())
                     }
                 }
             }
 
-        }.addOnFailureListener{exception ->
+        }.addOnFailureListener { exception ->
             Log.e(activity.javaClass.simpleName, exception.message, exception)
         }
     }
@@ -220,7 +222,6 @@ class FireStoreClass {
                 Log.e("Get Product List", "Error while getting product list.", e)
             }
     }
-
 
 
     fun getAllProductsList(activity: CartListActivity) {
@@ -336,7 +337,6 @@ class FireStoreClass {
     }
 
 
-
     /**
      * A function to check whether the item already exist in the cart or not.
      */
@@ -353,9 +353,7 @@ class FireStoreClass {
                 // If the document size is greater than 1 it means the product is already added to the cart.
                 if (document.documents.size > 0) {
                     activity.productExistInCart()
-                }
-
-                else{
+                } else {
                     activity.productDoesNotExistInCart()
                 }
             }
@@ -473,18 +471,18 @@ class FireStoreClass {
     }
 
 
-    fun placeOrder (activity: CartListActivity, order: Order){
+    fun placeOrder(activity: CartListActivity, order: Order) {
         mFireStore.collection(Constants.ORDERS).document().set(order, SetOptions.merge())
             .addOnSuccessListener {
                 Log.i(activity.javaClass.simpleName, "Items added to cart successfully!")
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 Log.e(activity.javaClass.simpleName, "Error while placing an Order")
             }
     }
 
 
-    fun updateAllDetails(activity: CartListActivity, cartList: ArrayList<CartItem>){
+    fun updateAllDetails(activity: CartListActivity, cartList: ArrayList<CartItem>) {
 
         //Create FireStoreBatch to update everything at once.
         val writeBatch = mFireStore.batch()
@@ -496,13 +494,15 @@ class FireStoreClass {
             productHashMap[Constants.STOCK_QUANTITY] =
                 (cartItem.stock_quantity.toInt() - cartItem.cart_quantity.toInt()).toString()
 
-            val documentReference = mFireStore.collection(Constants.PRODUCTS).document(cartItem.product_id)
+            val documentReference =
+                mFireStore.collection(Constants.PRODUCTS).document(cartItem.product_id)
 
             writeBatch.update(documentReference, productHashMap)
         }
 
         for (cartItem in cartList) {
-            val documentReference = mFireStore.collection(Constants.CART_ITEMS).document(cartItem.id)
+            val documentReference =
+                mFireStore.collection(Constants.CART_ITEMS).document(cartItem.id)
             writeBatch.delete(documentReference)
         }
 
@@ -512,8 +512,11 @@ class FireStoreClass {
                 Log.i(activity.javaClass.simpleName, "Cart Updated Successfully on Database End!")
 
             }
-            .addOnFailureListener{e ->
-                Log.e(activity.javaClass.simpleName, "Error while updating all the details after order is placed.")
+            .addOnFailureListener { e ->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while updating all the details after order is placed."
+                )
             }
 
     }
@@ -540,6 +543,28 @@ class FireStoreClass {
             .addOnFailureListener { e ->
 
                 Log.e(fragment.javaClass.simpleName, "Error while getting the orders list.", e)
+            }
+    }
+
+    fun getHotProductList(fragment: HomeFragment) {
+        mFireStore.collection(Constants.HOT_PRODUCTS)
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                val list: ArrayList<HotProduct> = ArrayList()
+
+                for (i in document.documents) {
+
+                    val orderItem = i.toObject(HotProduct::class.java)!!
+                    orderItem.product_id = i.id
+                    list.add(orderItem)
+                }
+
+                fragment.successHotProductListFromFirestore(list)
+
+            }
+            .addOnFailureListener {e ->
+                Log.e(fragment.javaClass.simpleName, "Failed to Retrieve the Image.", e)
             }
     }
 

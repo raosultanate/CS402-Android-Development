@@ -8,6 +8,7 @@ import android.webkit.MimeTypeMap
 
 object Constants {
 
+    const val HOT_PRODUCTS: String = "hot_products"
     const val STOCK_QUANTITY: String = "stock_quantity"
     const val ORDERS: String = "orders"
     val CART_QUANTITY: String = "cart_quantity"

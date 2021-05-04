@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.HomeFragment"
+    android:orientation="vertical">
+
+    <com.example.dapparels.Utilities.DATextViewRegular
+        android:id="@+id/DATextViewRegular2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Danny Apparels"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.dapparels.Utilities.DATextViewBold
+        android:id="@+id/DATextViewBold4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Exclusive Deals. Buy 2 get 20% OFF"
+        app:layout_constraintTop_toBottomOf="@+id/DATextViewRegular2"
+        tools:layout_editor_absoluteX="37dp" />
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:layout_marginTop="36dp"
+        app:iss_auto_cycle="true"
+        app:iss_corner_radius="5"
+        app:iss_delay="0"
+        app:iss_period="1000"
+        app:iss_placeholder="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DATextViewBold4"
+        android:gravity="center_horizontal" />
+
+    <com.example.dapparels.Utilities.DATextViewRegular
+        android:paddingTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today's Temperature: 20\u2109"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slider" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

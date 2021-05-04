@@ -75,6 +75,7 @@ dependencies {
     //google cloud storage
     implementation 'com.google.firebase:firebase-storage-ktx'
     apply plugin: 'com.google.gms.google-services'
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
 
 
 }
