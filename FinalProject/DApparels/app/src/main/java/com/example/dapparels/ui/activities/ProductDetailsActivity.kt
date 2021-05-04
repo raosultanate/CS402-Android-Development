@@ -1,5 +1,6 @@
 package com.example.dapparels.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import com.example.dapparels.Utilities.GlideLoader
 import com.example.dapparels.firestore.FireStoreClass
 import com.example.dapparels.models.CartItem
 import com.example.dapparels.models.Product
+import kotlinx.android.synthetic.main.activity_cart_list.*
 import kotlinx.android.synthetic.main.activity_product_details.*
 
 class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
@@ -45,6 +47,12 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
        tv_product_details_description.text = product.description
        tv_product_details_stock_quantity.text = product.stock_quantity
 
+       if (product.stock_quantity.toInt() == 0){
+           btn_add_to_cart.visibility = View.GONE
+           tv_product_details_stock_quantity.text = resources.getString(R.string.lbl_out_of_stock)
+
+       }
+
        if(FireStoreClass().getCurrentUserID() == product.product_id){
            //do nothing here
        }
@@ -69,7 +77,7 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 R.id.btn_go_to_cart -> {
-
+                    startActivity(Intent(this, CartListActivity::class.java))
                 }
             }
         }

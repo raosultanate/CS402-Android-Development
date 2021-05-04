@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dapparels.R
 import com.example.dapparels.firestore.FireStoreClass
 import com.example.dapparels.models.Product
+import com.example.dapparels.ui.activities.CartListActivity
 import com.example.dapparels.ui.activities.SettingsActivity
 import com.example.dapparels.ui.adapters.DashboardItemsListAdapter
+import kotlinx.android.synthetic.main.activity_cart_list.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : BaseFragment() {
@@ -43,6 +45,11 @@ class DashboardFragment : BaseFragment() {
             R.id.action_settings -> {
 
                 startActivity(Intent(activity, SettingsActivity::class.java))
+                return true
+            }
+
+            R.id.action_cart -> {
+                startActivity(Intent(activity, CartListActivity::class.java))
                 return true
             }
         }
