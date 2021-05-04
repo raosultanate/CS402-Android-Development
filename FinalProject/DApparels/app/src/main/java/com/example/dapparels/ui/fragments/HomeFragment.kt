@@ -15,12 +15,20 @@ import com.example.dapparels.firestore.FireStoreClass
 import com.example.dapparels.models.HotProduct
 import com.example.dapparels.models.Product
 import com.example.dapparels.ui.adapters.MyProductListAdapter
+import com.example.p1.POST.POST
+import com.example.p1.apiInterface
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_products.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class HomeFragment : BaseFragment() {
 
     private val BASE_URL = "https://api.openweathermap.org/"
+    private var TEMP_STRING = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +43,7 @@ class HomeFragment : BaseFragment() {
 
 
     fun successHotProductListFromFirestore(hotProductList:ArrayList<HotProduct>){
-
+        getMyData()
 
         val slideModels: ArrayList<SlideModel> = ArrayList()
 
@@ -51,6 +59,7 @@ class HomeFragment : BaseFragment() {
             slider.setImageList(slideModels)
 
         }
+       //
 
     }
 
@@ -73,11 +82,23 @@ class HomeFragment : BaseFragment() {
 
     }
 
-//    private fun getMyData(){
-//        val retroFitBuilder = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(
-//            BASE_URL).build().create(apiInterface::class.java)
-//
-//        val retroFitData = retroFitBuilder.getData()
-//
-//    }
+    private fun getMyData(){
+        val retroFitBuilder = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(
+            BASE_URL).build().create(apiInterface::class.java)
+
+        val retroFitData = retroFitBuilder.getData()
+        retroFitData.enqueue(object : Callback<POST?> {
+            override fun onFailure(call: Call<POST?>, t: Throwable) {
+                Log.d("P1_Error", "Error: " + t.message)
+
+            }
+
+            override fun onResponse(call: Call<POST?>, response: Response<POST?>) {
+                var responseBody = response.body()?.main?.temp!!
+                println("Temperature is: " + responseBody.toString())
+                TEMP_STRING = toFarenheitConvertor(responseBody.toString())
+                tempTV.text = "Today's Temperature: ${TEMP_STRING} \u2109"
+            }
+        })
+    }
 }

@@ -77,6 +77,9 @@ dependencies {
     apply plugin: 'com.google.gms.google-services'
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
 
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
 
 }
 
