@@ -1,5 +1,6 @@
 package com.example.dapparels.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -49,6 +50,7 @@ class RegisterActivity : BaseActivity() {
             val password: String =et_password.text.toString().trim{it <= ' '}
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
@@ -73,6 +75,8 @@ class RegisterActivity : BaseActivity() {
 
     fun userRegisterationSuccess(){
         Toast.makeText(this, resources.getString(R.string.register_success), Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 
     /**

@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.ProductsFragment"
-    android:background="@color/colorOffWhite">
+    android:background="@color/colorOffWhite"
+    android:paddingBottom="300dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_my_product_items"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="560dp"
         android:visibility="gone"
 
         app:layout_constraintBottom_toBottomOf="parent"
