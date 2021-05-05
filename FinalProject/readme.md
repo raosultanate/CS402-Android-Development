@@ -17,8 +17,7 @@ https://youtu.be/_sYQd1Zg838
 
 **Danny Apparels Screenshot**
 
-<img width="375" alt="Screen Shot 2021-05-04 at 9 49 48 PM" src="https://user-images.githubusercontent.com/76628973/117098396-9af6da00-ad2b-11eb-8700-7019f2c991dd.png">
-<img width="376" alt="Screen Shot 2021-05-04 at 9 50 13 PM" src="https://user-images.githubusercontent.com/76628973/117098409-a5b16f00-ad2b-11eb-858a-04d629fe7ea7.png">
+<img width="375" alt="Screen Shot 2021-05-04 at 9 49 48 PM" src="https://user-images.githubusercontent.com/76628973/117098396-9af6da00-ad2b-11eb-8700-7019f2c991dd.png"><img width="376" alt="Screen Shot 2021-05-04 at 9 50 13 PM" src="https://user-images.githubusercontent.com/76628973/117098409-a5b16f00-ad2b-11eb-858a-04d629fe7ea7.png">
 <img width="379" alt="Screen Shot 2021-05-04 at 9 50 39 PM" src="https://user-images.githubusercontent.com/76628973/117098415-a77b3280-ad2b-11eb-9985-643e8e0f7dd2.png">
 <img width="375" alt="Screen Shot 2021-05-04 at 9 52 11 PM" src="https://user-images.githubusercontent.com/76628973/117098420-aa762300-ad2b-11eb-8408-b3cd36bd78c7.png">
 <img width="374" alt="Screen Shot 2021-05-04 at 9 52 46 PM" src="https://user-images.githubusercontent.com/76628973/117098426-ad711380-ad2b-11eb-85ee-6a9f074dd33b.png">
